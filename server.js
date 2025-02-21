@@ -1,7 +1,9 @@
 ﻿const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const app = express();
-const port = 3000;
+
+// PORT ko dynamic bana rahe hain taki Render ka port use ho
+const PORT = process.env.PORT || 3000;
 
 // SQLite Database Setup
 const db = new sqlite3.Database("./views.db", (err) => {
@@ -86,6 +88,6 @@ app.get("/view/:repo", (req, res) => {
 });
 
 // Start the Server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
