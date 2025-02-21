@@ -4,6 +4,7 @@ const app = express();
 
 // PORT ko dynamic bana rahe hain taki Render ka port use ho
 const PORT = process.env.PORT || 3000;
+const BASE_URL = "https://github-views-counter.onrender.com"; // Render Hosted URL
 
 // SQLite Database Setup
 const db = new sqlite3.Database("./views.db", (err) => {
@@ -79,7 +80,7 @@ app.get("/view/:repo", (req, res) => {
                     <p class="counter">👀 Views: ${count}</p>
                 </div>
                 <script>
-                    setTimeout(() => { location.reload(); }, 5000);
+                    setTimeout(() => { window.location.href = "${BASE_URL}/view/${repo}"; }, 5000);
                 </script>
             </body>
             </html>
@@ -89,5 +90,5 @@ app.get("/view/:repo", (req, res) => {
 
 // Start the Server
 app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running at ${BASE_URL}`);
 });
